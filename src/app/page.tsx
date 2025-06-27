@@ -1,13 +1,17 @@
-import { Button } from "@/components/ui/button";
+import { getQueryClient, trpc } from "@/trpc/server";
+import { HydrationBoundary } from "@tanstack/react-query";
+import { Suspense } from "react";
+import { Client } from "./client";
 
-export default function Home() {
+export default async function Home() {
+  const queryClient = getQueryClient();
+  void queryClient.prefetchQuery(trpc.hello.queryOptions({ text: "Ajay PREFETCH" }));
+
   return (
-    <div className="font-bold text-rose-500">
-      Hello World!
-
-      <Button variant="destructive">
-        Click me
-        </Button>
-    </div>
+    <HydrationBoundary>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Client />
+      </Suspense>
+    </HydrationBoundary>
   );
 }
