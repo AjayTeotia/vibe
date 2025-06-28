@@ -32,7 +32,7 @@ export default function RootLayout({
         >
           {children}
 
-          <Toaster richColors closeButton position="top-right" />
+          <Toaster />
         </body>
       </html>
     </TRPCReactProvider>
