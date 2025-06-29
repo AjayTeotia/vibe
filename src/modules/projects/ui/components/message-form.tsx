@@ -43,9 +43,7 @@ export function MessageForm({ projectId }: props) {
         },
         onError: (error) => {
             // TODO: Redirect to pricing page if specific error
-            toast.error("Something went wrong", {
-                description: error.message
-            })
+            toast.error(error.message);
         }
     }))
 
