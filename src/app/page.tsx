@@ -16,9 +16,7 @@ export default function Home() {
 
   const createProject = useMutation(trpc.projects.create.mutationOptions({
     onError: (error) => {
-      toast.error("Something went wrong", {
-        description: error.message,
-      });
+      toast.error(error.message);
     },
     onSuccess: (data) => {
       router.push(`/projects/${data.id}`);
