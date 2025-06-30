@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { useTRPC } from "@/trpc/client";
+import { useClerk } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ArrowUpIcon, Loader2Icon } from "lucide-react";
@@ -22,6 +23,7 @@ const formSchema = z.object({
 })
 
 export function ProjectForm() {
+    const clerk = useClerk();
     const router = useRouter();
     const trpc = useTRPC();
     const queryClient = useQueryClient();
@@ -41,7 +43,10 @@ export function ProjectForm() {
             // TODO: Invalidate usage status
         },
         onError: (error) => {
-            // TODO: Redirect to pricing page if specific error
+            if (error.data?.code === "UNAUTHORIZED") {
+                clerk.openSignIn(); 
+            }
+
             toast.error(error.message);
         }
     }))

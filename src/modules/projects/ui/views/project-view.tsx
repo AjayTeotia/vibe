@@ -16,6 +16,7 @@ import { Suspense, useState } from "react";
 import { FragmentWeb } from "../components/fragment-web";
 import { MessagesContainer } from "../components/messages-container";
 import { ProjectHeader } from "../components/project-header";
+import { UserControl } from "@/components/user-control";
 
 interface props {
     projectId: string
@@ -46,7 +47,7 @@ export function ProjectView({ projectId }: props) {
                     </Suspense>
                 </ResizablePanel>
 
-                <ResizableHandle className="hover:bg-primary transition-colors"  />
+                <ResizableHandle className="hover:bg-primary transition-colors" />
 
                 <ResizablePanel
                     defaultSize={65}
@@ -75,6 +76,8 @@ export function ProjectView({ projectId }: props) {
                                         <CrownIcon /> Upgrade
                                     </Link>
                                 </Button>
+
+                                <UserControl />
                             </div>
                         </div>
 
