@@ -24,8 +24,7 @@ export function MessagesContainer({
     const { data: messages } = useSuspenseQuery(trpc.message.getMany.queryOptions({
         projectId: projectId
     }, {
-        // TODO: Temporary Live update message
-        refetchInterval: 5000
+        refetchInterval: 2000
     }))
 
     useEffect(() => {
